@@ -1,0 +1,22 @@
+﻿<Window x:Class="InterfaceGrafica.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InterfaceGrafica"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Menu HorizontalAlignment="Left" Height="192" Margin="33,38,0,0" VerticalAlignment="Top" Width="196">
+            <MenuItem Header="Sapato">
+                <MenuItem Header="Cadastrar" Click="tela_sapato"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Venda">
+                <MenuItem Header="Cadastrar" Click="tela_venda"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Relatórios">
+                <MenuItem Header="Relatório de Pessoas Físicas" Click="tela_relatorio_fisica"></MenuItem>
+            </MenuItem>
+        </Menu>
+    </Grid>
+</Window>

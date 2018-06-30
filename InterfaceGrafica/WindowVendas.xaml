@@ -1,0 +1,41 @@
+﻿<Window x:Class="InterfaceGrafica.WindowVendas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InterfaceGrafica"
+        mc:Ignorable="d"
+        Title="WindowVendas" Height="450" Width="800">
+    <Grid>
+        <DataGrid Name="listagem_sapatos" HorizontalAlignment="Left" Height="250" Margin="31,200,0,0" AutoGenerateColumns="False" VerticalAlignment="Top" Width="731">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="120" Header="Nome do Sapato" Binding="{Binding nome}" />
+                <DataGridTextColumn Width="90" Header="Cor" Binding="{Binding cor}" />
+                <DataGridTextColumn Width="100" Header="Material" Binding="{Binding material}" />
+                <DataGridTextColumn Width="90" Header="Preco" Binding="{Binding preco}" />
+                <DataGridTextColumn Width="120" Header="Peças Disponíveis" Binding="{Binding quantidadeDisponivel}" />
+                <!--<DataGridTemplateColumn Header="Quantidade Desejada">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Name="qqq" Grid.Row="1" MaxLength="{Binding quantidade}" DataContextChanged="TextBox_DataContextChanged" PreviewTextInput="quantidade_desejada_PreviewTextInput" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Width="80" Text="Ações" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Width="80" x:Name="updateBtn" Content="Comprar" Click="updateBtn_Click" Background="ForestGreen" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
