@@ -11,13 +11,16 @@ namespace Entidades.Class
     public class ItensVenda
     {
         [Key]
-        public int idItensVenda { get; set; }
-        public int idVenda { get; set; }
-        [ForeignKey("idVenda")]
-        public Venda venda { get; set; }
-        public int quantidade { get; set; }
-        public int idSapato { get; set; }
-        [ForeignKey("idSapato")]
-        public Sapato sapato { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int IdItensVenda { get; set; }
+
+        public int IdVenda { get; set; }
+        [ForeignKey("IdVenda")]
+        public Venda Venda { get; set; }
+        public int Quantidade { get; set; }
+        public double ValorUnidade { get; set; }
+        public int IdSapato { get; set; }
+        [ForeignKey("IdSapato")]
+        public Sapato Sapato { get; set; }
     }
 }

@@ -21,5 +21,6 @@ namespace Entidades.Class
         public int quantidadeDisponivel { get; set; }
         public int quantidadeEstoque { get; set; }
         public int numero { get; set; }
+        public byte[] Foto { get; set; }
     }
 }

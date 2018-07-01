@@ -11,11 +11,13 @@ namespace Entidades.Class
     public class Venda
     {
         [Key]
-        public int idVenda { get; set; }
-        public IList<Sapato> sapatos { get; set; }
-        public decimal total { get; set; }
-        public int idPessoa { get; set; }
-        [ForeignKey("idPessoa")]
-        public Pessoa pessoa { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int IdVenda { get; set; }
+
+        public IList<Sapato> Sapatos { get; set; }
+        public decimal Total { get; set; }
+        public int IdPessoa { get; set; }
+        [ForeignKey("IdPessoa")]
+        public Pessoa Pessoa { get; set; }
     }
 }
