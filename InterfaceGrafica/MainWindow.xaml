@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InterfaceGrafica"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Menu da Sapataria" Height="450" Width="800">
     <Grid>
         <Menu HorizontalAlignment="Left" Height="192" Margin="33,38,0,0" VerticalAlignment="Top" Width="196">
             <MenuItem Header="Sapato">
@@ -15,7 +15,7 @@
                 <MenuItem Header="Cadastrar" Click="tela_venda"></MenuItem>
             </MenuItem>
             <MenuItem Header="Relatórios">
-                <MenuItem Header="Relatório de Pessoas Físicas" Click="tela_relatorio_fisica"></MenuItem>
+                <MenuItem Header="Relatório de Vendas" Click="tela_relatorio_fisica"></MenuItem>
             </MenuItem>
         </Menu>
     </Grid>

@@ -5,29 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InterfaceGrafica"
         mc:Ignorable="d"
-        Title="WindowRelatorioVendas" Height="330" Width="800">
+        Title="Relatório das Vendas" Height="330" Width="800">
     <Grid>
-        <DataGrid Name="listagem_vendas" HorizontalAlignment="Left" Height="250" Margin="27,22,0,0" AutoGenerateColumns="False" VerticalAlignment="Top" Width="740">
+        <DataGrid Name="listagem_vendas" HorizontalAlignment="Left" Height="250" CanUserAddRows="false" Margin="27,22,0,0" AutoGenerateColumns="False" VerticalAlignment="Top" Width="740">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="120" Header="ID" Binding="{Binding id}" />
-                <DataGridTextColumn Width="90" Header="Nome do Compraor" Binding="{Binding Path=pessoaFisica.nome}" />
-                <DataGridTextColumn Width="100" Header="Material" Binding="{Binding material}" />
-                <DataGridTextColumn Width="90" Header="Preco" Binding="{Binding preco}" />
-                <DataGridTextColumn Width="120" Header="Peças Disponíveis" Binding="{Binding quantidadeDisponivel}" />
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock Width="80" Text="Ações" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Width="80" x:Name="updateBtn" Content="Comprar" Background="ForestGreen" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn Width="120" Header="ID da Venda" Binding="{Binding IdVenda}" />
+                <DataGridTextColumn Width="140" Header="Nome do Comprador" Binding="{Binding Venda.Pessoa.nome}" />
+                <DataGridTextColumn Width="130" Header="Modelo" Binding="{Binding Sapato.nome}" />
+                <DataGridTextColumn Width="110" Header="Tamanho" Binding="{Binding Sapato.numero}" />
+                <DataGridTextColumn Width="110" Header="Preco da Unidade" Binding="{Binding ValorUnidade}" />
+                <DataGridTextColumn Width="125" Header="Quantidade de itens" Binding="{Binding Quantidade}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

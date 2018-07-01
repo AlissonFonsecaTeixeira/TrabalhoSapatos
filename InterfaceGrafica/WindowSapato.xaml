@@ -18,10 +18,10 @@
         <Label Content="Preco" HorizontalAlignment="Left" Margin="514,43,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.078,0.586"/>
         <DataGrid Name="listagem_sapatos" HorizontalAlignment="Left" Height="187" Margin="30,201,0,0" CanUserAddRows="false" AutoGenerateColumns="False" VerticalAlignment="Top" Width="731">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="50" Header="Id" Binding="{Binding id}" />
+                <DataGridTextColumn Width="50" Header="Id" Binding="{Binding idSapato}" />
                 <DataGridTextColumn Width="170" Header="Nome do Sapato" Binding="{Binding nome}" />
-                <DataGridTextColumn Width="130" Header="Cor" Binding="{Binding cor}" />
-                <DataGridTextColumn Width="130" Header="Material" Binding="{Binding material}" />
+                <DataGridTextColumn Width="115" Header="Cor" Binding="{Binding cor}" />
+                <DataGridTextColumn Width="115" Header="Material" Binding="{Binding material}" />
                 <DataGridTextColumn Width="100" Header="Preco" Binding="{Binding preco}" />
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.HeaderTemplate>
@@ -34,6 +34,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <Button x:Name="updateBtn" Content="Atualizar" Background="Blue" Click="editar_sapato" />
                                 <Button x:Name="deleteBtn" Content="Apagar" Background="Red" Click="apagar_sapato" />
+                                <Button x:Name="trocaFotoBtn" Content="Trocar Foto" Background="Green" Click="trocar_foto" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -41,6 +42,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Cadastrar" Background="Green" HorizontalAlignment="Left" Click="cadastrar_sapato" Margin="543,128,0,0" VerticalAlignment="Top" Width="185" Height="53"/>
+        <Button Content="Exportar" Background="Yellow" HorizontalAlignment="Left" Click="exportar_Relatorio" Margin="353,128,0,0" VerticalAlignment="Top" Width="185" Height="53"/>
         <CheckBox Content="Cadarço" Name="cadarco" HorizontalAlignment="Left" Margin="684,74,0,0" VerticalAlignment="Top" Height="23" Width="77"/>
         <TextBox HorizontalAlignment="Left" Name="numero" Height="23" Margin="30,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox HorizontalAlignment="Left" Name="quantidade" Height="23" Margin="191,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>

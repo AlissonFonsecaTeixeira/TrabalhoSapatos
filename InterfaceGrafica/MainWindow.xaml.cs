@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.Entity;
-using TrabalhoSapatos.Control;
+using Entidades.Control;
 
 namespace InterfaceGrafica
 {

@@ -11,9 +11,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BibliotecaModel;
 using System.Data.Entity;
 using System.Text.RegularExpressions;
+using Entidades.Control;
+using Entidades.Class;
+using TrabalhoSapatos.Control;
 
 namespace InterfaceGrafica
 {
@@ -22,49 +24,34 @@ namespace InterfaceGrafica
     /// </summary>
     public partial class WindowVendaProduto : Window
     {
-        ModelSapato modelSapato = new ModelSapato();
-        ModelVenda ModelVenda = new ModelVenda();
+        SapatoController sapatoController = new SapatoController();
+        PessoaController pessoaController = new PessoaController();
+        VendaController vendaController = new VendaController();
+        SapatoContext ctx = new SapatoContext();
         Venda venda = new Venda()
         {
-            sapatos = new List<Sapato>(),
+            Sapatos = new List<Sapato>(),
         };
         int id = 0;
         int QuantidadeMaxima;
-        int Idsapato;
 
-        public WindowVendaProduto(string nomeParameter = null, Sapato sapatoParameter = null, string quantidadeDesejadaProduto = null)
+        public WindowVendaProduto(string nomeParameter = null)
         {
             InitializeComponent();
             nome_cliente.Text = nomeParameter;
-            quantidade_itens.Text = "0";
-            //Database.SetInitializer<ModelVenda>(new DropCreateDatabaseIfModelChanges<ModelVenda>());
-            if (sapatoParameter != null && quantidadeDesejadaProduto != null)
-            {
-                total.Text = Convert.ToString(sapatoParameter.preco * Convert.ToInt32(quantidadeDesejadaProduto));
-                if (quantidade_itens.Text == "Quantidade de Itens")
-                {
-                    quantidade_itens.Text = "0";
-                }
-                quantidade_itens.Text = Convert.ToString(Convert.ToInt32(quantidadeDesejadaProduto));
-            }
-            //venda.sapatos = new IList<Sapato>();
             carregarGridSapato();
         }
 
         private void carregarGridSapato()
         {
-            listagem_sapatos.ItemsSource = modelSapato.sapatos.ToList();
+            listagem_sapatos.ItemsSource = sapatoController.ObterSapatos();
         }
 
         private void updateBtn_Click(object sender, RoutedEventArgs e)
         {
-            //WindowVendaQuantidade windowVenda = new WindowVendaQuantidade((listagem_sapatos.SelectedItem as Sapato), nome_cliente.Text);
             produto_carrinho.Text = (listagem_sapatos.SelectedItem as Sapato).nome;
             this.id = (listagem_sapatos.SelectedItem as Sapato).idSapato;
             this.QuantidadeMaxima = (listagem_sapatos.SelectedItem as Sapato).quantidadeDisponivel;
-            this.Idsapato = (listagem_sapatos.SelectedItem as Sapato).idSapato;
-            //this.Hide();
-            //windowVenda.ShowDialog();
         }
 
         private void quantidade_carrinho_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -72,16 +59,16 @@ namespace InterfaceGrafica
             e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
         }
 
+        /**
+         * Função para adicionar um sapato ao carrinho 
+         **/
         private void adicionar_carrinho(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show(Convert.ToString(Convert.ToInt32(quantidade_itens.Text) + Convert.ToInt32(quantidade_carrinho.Text)));
             quantidade_itens.Text = Convert.ToString(Convert.ToInt32(quantidade_itens.Text) + Convert.ToInt32(quantidade_carrinho.Text));
-            Sapato sapato = modelSapato.sapatos.Where(s => s.idSapato == this.Idsapato).FirstOrDefault();
-            total.Text = Convert.ToString(Convert.ToDouble(sapato.preco * Convert.ToInt32(quantidade_itens.Text)));
+            Sapato sapato = sapatoController.buscarSapato(this.id);
+            total.Text = Convert.ToString(Convert.ToDouble(sapato.preco * Convert.ToInt32(quantidade_carrinho.Text)) + Convert.ToDouble(total.Text));
             sapato.quantidadeDisponivel = sapato.quantidadeEstoque - Convert.ToInt32(quantidade_carrinho.Text);
-            //MessageBox.Show("Quantidade disponivel: " + sapato.quantidadeDisponivel);
-            venda.sapatos.Add(sapato);
-            modelSapato.SaveChanges();
+            venda.Sapatos.Add(sapato);
             carregarGridSapato();
             produto_carrinho.Text = "";
             quantidade_carrinho.Text = "";
@@ -103,36 +90,53 @@ namespace InterfaceGrafica
             }
         }
 
+        /**
+         * Função que finaliza a compra do cliente 
+         **/
         private void finalizar_carrinho(object sender, RoutedEventArgs e)
         {
-            ModelPessoa modelPessoa = new ModelPessoa();
-            var pessoa = modelPessoa.pessoas.OfType<PessoaFisica>().Where(p => p.nome == nome_cliente.Text).FirstOrDefault();
+
+            var pessoa = pessoaController.buscarPessoaFisicaPeloNome(nome_cliente.Text);
             if (pessoa == null)
             {
-                var pessoa1 = modelPessoa.pessoas.OfType<PessoaJuridica>().Where(j => j.nome == nome_cliente.Text).FirstOrDefault();
-                venda.idPessoa = pessoa1.idPessoa;
+                var pessoa1 = pessoaController.buscarPessoaJuridicaPeloNome(nome_cliente.Text);
+                venda.IdPessoa = pessoa1.idPessoa;
             }
             else
             {
-                venda.pessoa.idPessoa = pessoa.idPessoa;
+                venda.IdPessoa = pessoa.idPessoa;
             }
-            //venda.total = Convert.ToDecimal(total.Text);
-            ModelVenda.vendas.Add(venda);
-            ModelVenda.SaveChanges();
-            atualizarEstoque();
+            venda.Total = Convert.ToDecimal(total.Text);
+            //adiciona a lista de sapatos para uma variavel e depois zera a variavel, para não precisar fazer um foreach com EntityState.Unchanged
+            IList<Sapato> listaSapatos = venda.Sapatos;
+            venda.Sapatos = null;
+            ctx.Vendas.Add(venda);
+            ctx.SaveChanges();
+            cadastrarItensDaVenda(listaSapatos, venda.IdVenda);
+            //Chamada na função para atualizar o estoque, removendo da quantidade disponivel os que foram comprados
+            sapatoController.removeDoEstoque();
             MessageBox.Show("Compra realizada com sucesso !");
             System.Threading.Thread.Sleep(2000);
-            this.Hide();
+            this.Close();
         }
 
-        private void atualizarEstoque()
+        /**
+         * Função que recebe uma lista de sapatos e a qual venda eles pertencem, aonde realiza os seus registros na tabela ItensVenda
+         * */
+        private void cadastrarItensDaVenda(IList<Sapato> sapatos, int idVendaParameter)
         {
-            ModelSapato modelSapato = new ModelSapato();
-            foreach (Sapato spt in modelSapato.sapatos)
+            foreach (Sapato s in sapatos)
             {
-                spt.quantidadeEstoque = spt.quantidadeDisponivel;
+                ctx.Entry(s).State = EntityState.Unchanged;
+                ItensVenda itensVenda = new ItensVenda();
+                itensVenda.IdVenda = idVendaParameter;
+                itensVenda.IdSapato = s.idSapato;
+                itensVenda.ValorUnidade = s.preco;
+                itensVenda.Quantidade = s.quantidadeEstoque - s.quantidadeDisponivel;
+                ctx.itensVenda.Add(itensVenda);
             }
-            modelSapato.SaveChanges();
+            ctx.SaveChanges();
         }
+
     }
 }

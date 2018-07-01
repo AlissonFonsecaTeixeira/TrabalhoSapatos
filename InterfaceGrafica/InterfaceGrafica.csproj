@@ -79,9 +79,6 @@
     <Compile Include="WindowVendaProduto.xaml.cs">
       <DependentUpon>WindowVendaProduto.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowVendaQuantidade.xaml.cs">
-      <DependentUpon>WindowVendaQuantidade.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -118,10 +115,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowVendaQuantidade.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -151,13 +144,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\..\source\repos\TrabalhoSapatos\TrabalhoSapatos\Entidades.csproj">
+    <ProjectReference Include="..\..\..\..\..\..\..\source\repos\TrabalhoSapatos\Entidades\Entidades.csproj">
       <Project>{7fb8e8a5-e4f6-4724-96a5-437317589590}</Project>
       <Name>Entidades</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BibliotecaModel\BibliotecaModel.csproj">
-      <Project>{5233a9a3-72ca-4311-9e86-8e86b166c34b}</Project>
-      <Name>BibliotecaModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

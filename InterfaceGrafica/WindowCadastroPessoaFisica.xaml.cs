@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BibliotecaModel;
+using TrabalhoSapatos.Control;
 
 namespace InterfaceGrafica
 {
@@ -20,11 +21,12 @@ namespace InterfaceGrafica
     /// </summary>
     public partial class WindowCadastroPessoaFisica : Window
     {
-        ModelPessoa modelPessoaFisica = new ModelPessoa();
+        PessoaController pessoaController = new PessoaController();
 
-        public WindowCadastroPessoaFisica(string cpf)
+        public WindowCadastroPessoaFisica(string cpfParameter)
         {
             InitializeComponent();
+            cpf.Text = cpfParameter;
         }
 
         private void cadastrar_pessoa_fisica(object sender, RoutedEventArgs e)
@@ -33,9 +35,8 @@ namespace InterfaceGrafica
             pessoaFisica.cpf = cpf.Text;
             pessoaFisica.nome = nome.Text;
             pessoaFisica.nascimento = Convert.ToDateTime(nascimento.Text);
-            modelPessoaFisica.pessoas.Add(pessoaFisica);
-            modelPessoaFisica.SaveChanges();
-            this.Hide();
+            pessoaController.cadastrar_pessoa_fisica(pessoaFisica);
+            this.Close();
             MessageBox.Show("Cliente cadastrado com sucesso");
             WindowVenda proximaJanela = new WindowVenda(null, cpf.Text);
             proximaJanela.ShowDialog();

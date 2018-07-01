@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Compra de Sapatos" Height="600" Width="800">
     <Grid>
-        <DataGrid Name="listagem_sapatos" HorizontalAlignment="Left" Height="250" Margin="31,200,0,0" AutoGenerateColumns="False" VerticalAlignment="Top" Width="731">
+        <DataGrid Name="listagem_sapatos" HorizontalAlignment="Left" CanUserAddRows="false" Height="250" Margin="31,200,0,0" AutoGenerateColumns="False" VerticalAlignment="Top" Width="731">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="120" Header="Nome do Sapato" Binding="{Binding nome}" />
                 <DataGridTextColumn Width="90" Header="Cor" Binding="{Binding cor}" />
@@ -43,8 +43,8 @@
         <Label TextElement.FontSize="17" Content="Quantidade de Itens" HorizontalAlignment="Left" Margin="317,35,0,0" VerticalAlignment="Top"/>
         <Label TextElement.FontSize="17" Content="Valor Total" HorizontalAlignment="Left" Margin="626,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.502,0.147"/>
         <TextBlock TextElement.FontSize="15" TextAlignment="Center" Name="nome_cliente" HorizontalAlignment="Left" Margin="64,73,0,0" TextWrapping="Wrap" Text="Nome do Cliente" VerticalAlignment="Top" Width="137" Height="27"/>
-        <TextBlock TextElement.FontSize="15" TextAlignment="Center" Name="quantidade_itens" HorizontalAlignment="Left" Margin="317,76,0,0" TextWrapping="Wrap" Text="Quantidade de Itens" VerticalAlignment="Top" Width="162" Height="24"/>
-        <TextBlock TextElement.FontSize="15" TextAlignment="Center" Name="total" HorizontalAlignment="Left" Margin="626,84,0,0" TextWrapping="Wrap" Text="R$" VerticalAlignment="Top" RenderTransformOrigin="0.601,1.107" Width="111" Height="16"/>
+        <TextBlock TextElement.FontSize="15" TextAlignment="Center" Name="quantidade_itens" HorizontalAlignment="Left" Margin="317,76,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="162" Height="24"/>
+        <TextBlock TextElement.FontSize="15" TextAlignment="Center" Name="total" HorizontalAlignment="Left" Margin="626,84,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" RenderTransformOrigin="0.601,1.107" Width="111" Height="16"/>
         <Button FontSize="17" Background="Beige" Content="Finalizar Compra" Click="finalizar_carrinho" HorizontalAlignment="Left" Margin="490,118,0,0" VerticalAlignment="Top" Width="142" Height="28" RenderTransformOrigin="1.583,0.233"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="31,476,0,22" Stroke="Black" Width="731"/>
         <TextBlock HorizontalAlignment="Left" FontSize="16" Margin="162,501,0,0" TextWrapping="Wrap" Name="produto_carrinho" VerticalAlignment="Top"/>

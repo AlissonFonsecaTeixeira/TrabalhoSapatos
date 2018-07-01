@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BibliotecaModel;
+using TrabalhoSapatos.Control;
 
 namespace InterfaceGrafica
 {
@@ -20,7 +20,7 @@ namespace InterfaceGrafica
     /// </summary>
     public partial class WindowRelatorioVendas : Window
     {
-        ModelVenda ModelVenda = new ModelVenda();
+        VendaController vendaController = new VendaController();
 
         public WindowRelatorioVendas()
         {
@@ -31,9 +31,7 @@ namespace InterfaceGrafica
 
         private void carregarGridVendas()
         {
-            //Database.SetInitializer<ModelSapato>(new DropCreateDatabaseIfModelChanges<ModelSapato>());
-            //MessageBox.Show("ID: " + ModelVenda.vendas.Where(s => s.pessoaFisica != null).Single().id);
-            listagem_vendas.ItemsSource = ModelVenda.vendas.ToList();
+            listagem_vendas.ItemsSource = vendaController.relatorioVenda();
         }
     }
 }

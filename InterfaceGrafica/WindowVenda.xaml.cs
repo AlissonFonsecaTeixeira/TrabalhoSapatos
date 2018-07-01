@@ -11,8 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BibliotecaModel;
 using System.Data.Entity;
+using TrabalhoSapatos.Control;
 
 namespace InterfaceGrafica
 {
@@ -21,9 +21,7 @@ namespace InterfaceGrafica
     /// </summary>
     public partial class WindowVenda : Window
     {
-        ModelPessoaFisica modelPessoaFisica = new ModelPessoaFisica();
-        ModelPessoaJuridica modelPessoaJuridica = new ModelPessoaJuridica();
-        ModelPessoa modelPessoa = new ModelPessoa();
+        PessoaController pessoaController = new PessoaController();
 
         public WindowVenda(string cnpjParameter = null, string cpfParameter = null)
         {
@@ -42,18 +40,18 @@ namespace InterfaceGrafica
         {
             if (cpf.Text != null)
             {
-                var pessoa = modelPessoa.pessoas.OfType<PessoaFisica>().Where(f => f.cpf == cpf.Text).FirstOrDefault();
+                var pessoa = pessoaController.buscarPessoaFisica(cpf.Text);
                 if (pessoa != null)
                 {
                     WindowVendaProduto windowProduto = new WindowVendaProduto(pessoa.nome);
-                    this.Hide();
+                    this.Close();
                     windowProduto.ShowDialog();
                 }
                 else
                 {
                     MessageBox.Show("Este cliente não existe no sistema, favor cadastra-lo !");
                     WindowCadastroPessoaFisica windowFisica = new WindowCadastroPessoaFisica(cpf.Text);
-                    this.Hide();
+                    this.Close();
                     windowFisica.ShowDialog();
                 }
                     // var itemExcluido = modelSapato.sapatos.Where(s => s.id == id).Single();
@@ -68,21 +66,20 @@ namespace InterfaceGrafica
         {
             if (cnpj.Text != null)
             {
-                var pessoa = modelPessoa.pessoas.OfType<PessoaJuridica>().Where(j => j.cnpj == cnpj.Text).FirstOrDefault();
+                var pessoa = pessoaController.buscarPessoaJuridica(cnpj.Text);
                 if (pessoa != null)
                 {
                     WindowVendaProduto windowProduto = new WindowVendaProduto(pessoa.nome);
-                    this.Hide();
+                    this.Close();
                     windowProduto.ShowDialog();
                 }
                 else
                 {
                     MessageBox.Show("Este cliente não existe no sistema, favor cadastra-lo !");
                     WindowCadastroPessoaJuridica windowJuridica = new WindowCadastroPessoaJuridica(cnpj.Text);
-                    this.Hide();
+                    this.Close();
                     windowJuridica.ShowDialog();
                 }
-                // var itemExcluido = modelSapato.sapatos.Where(s => s.id == id).Single();
             }
             else
             {
