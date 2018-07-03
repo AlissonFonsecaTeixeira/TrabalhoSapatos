@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceGrafica", "..\..\..\Documents\Faculdade\Projetos\C#\TrabalhoSapato\TrabalhoSapato\InterfaceGrafica\InterfaceGrafica.csproj", "{6989A029-B823-4F33-8A7A-EFD99A7796DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceGrafica", "InterfaceGrafica\InterfaceGrafica.csproj", "{6989A029-B823-4F33-8A7A-EFD99A7796DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Entidades.csproj", "{7FB8E8A5-E4F6-4724-96A5-437317589590}"
 EndProject
