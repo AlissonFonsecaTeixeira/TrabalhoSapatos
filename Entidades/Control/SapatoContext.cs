@@ -13,6 +13,13 @@ namespace Entidades.Control
         // 
         // If you wish to target a different database and/or database provider, modify the 'SapatoContext' 
         // connection string in the application configuration file.
+        
+        static SapatoContext()
+        {
+            var _ = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
+            //var __ = typeof(System.Data.Entity.SqlServerCompact.SqlCeProviderServices);
+        }
+        
         public SapatoContext()
             : base("name=SapatoContext")
         {
